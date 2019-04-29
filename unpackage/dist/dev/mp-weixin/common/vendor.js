@@ -60,6 +60,23 @@ createPage(_me.default);
 
 /***/ }),
 
+/***/ "../../../Documents/HBuilderProjects/next-superhero-dev/main.js?{\"page\":\"pages%2Fmovie%2Fmovie\"}":
+/*!*************************************************************************************************!*\
+  !*** D:/Documents/HBuilderProjects/next-superhero-dev/main.js?{"page":"pages%2Fmovie%2Fmovie"} ***!
+  \*************************************************************************************************/
+/*! no static exports found */
+/***/ (function(module, exports, __webpack_require__) {
+
+"use strict";
+/* WEBPACK VAR INJECTION */(function(createPage) {__webpack_require__(/*! uni-pages */ "../../../Documents/HBuilderProjects/next-superhero-dev/pages.json");
+
+var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mp-vue/dist/mp.runtime.esm.js"));
+var _movie = _interopRequireDefault(__webpack_require__(/*! ./pages/movie/movie.vue */ "../../../Documents/HBuilderProjects/next-superhero-dev/pages/movie/movie.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}
+createPage(_movie.default);
+/* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["createPage"]))
+
+/***/ }),
+
 /***/ "../../../Documents/HBuilderProjects/next-superhero-dev/main.js?{\"page\":\"pages%2Fsearch%2Fsearch\"}":
 /*!***************************************************************************************************!*\
   !*** D:/Documents/HBuilderProjects/next-superhero-dev/main.js?{"page":"pages%2Fsearch%2Fsearch"} ***!
@@ -6945,6 +6962,7 @@ var LIFECYCLE_HOOKS$1 = [
     'onShow',
     'onHide',
     'onUniNViewMessage',
+    'onError',
     //Page
     'onLoad',
     // 'onShow',

@@ -98,36 +98,200 @@ __webpack_require__.r(__webpack_exports__);
 /***/ (function(module, exports, __webpack_require__) {
 
 "use strict";
-/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0; //
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
-//
+/* WEBPACK VAR INJECTION */(function(uni) {Object.defineProperty(exports, "__esModule", { value: true });exports.default = void 0;var HelloComp = function HelloComp() {return __webpack_require__.e(/*! import() | components/HelloComp */ "components/HelloComp").then(__webpack_require__.bind(null, /*! ../../components/HelloComp.vue */ "../../../Documents/HBuilderProjects/next-superhero-dev/components/HelloComp.vue"));};var trailerStars = function trailerStars() {return __webpack_require__.e(/*! import() | components/trailerStars */ "components/trailerStars").then(__webpack_require__.bind(null, /*! ../../components/trailerStars.vue */ "../../../Documents/HBuilderProjects/next-superhero-dev/components/trailerStars.vue"));};
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 
 // import common from "../../common/common.js"
 var _default = {
   data: function data() {
     return {
-      carouseList: [] };
+      carouseList: [],
+      hotSuperHeorList: [],
+      TrailerList: [],
+      animationData: {},
+      animationDataArr: [{}, {}, {}, {}, {}],
+      guessULikeList: [] };
 
   },
-  onLoad: function onLoad() {var _this = this;
+  onUnload: function onUnload() {
+    this.animationData = {}; //页面卸载的时候清除动画数据
+    this.animationDataArr = [{}, {}, {}, {}, {}]; //页面卸载的时候清除动画数据
+  },
+  onPullDownRefresh: function onPullDownRefresh() {
+    this.refresh();
+  },
+  onLoad: function onLoad() {
+    var that = this;
+
+    this.animation = uni.createAnimation();
+
+    // 在页面创建的时候创建一个临时动画对象
     // 请求轮播图
     // var me = this;
     // 获取common.js中的服务器地址
@@ -135,7 +299,8 @@ var _default = {
     // var serverUrl =common.serverUrl;
 
     // 通过挂载到main.js中获取服务器地址，作为全局变量
-    var serverUrl = this.serverUrl;
+    var serverUrl = that.serverUrl;
+
     uni.request({
       url: serverUrl + '/index/carousel/list',
       method: "POST",
@@ -147,16 +312,123 @@ var _default = {
 
       success: function success(res) {
         // debugger
+        // console.log(res.data);
+        if (res.data.status == 200) {
+          that.carouseList = res.data.data;
+        }
+      } });
+
+    // 查询超英热门
+    uni.request({
+      url: serverUrl + '/index/movie/hot?type=superhero',
+      method: "POST",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded' },
+
+      data: {
+        qq: '' },
+
+
+      success: function success(res) {
+        // debugger
         console.log(res.data);
         if (res.data.status == 200) {
-          _this.carouseList = res.data.data;
+          that.hotSuperHeorList = res.data.data;
 
         }
 
       } });
 
+
+    // 查询预告片
+    uni.request({
+      url: serverUrl + '/index/movie/hot?type=trailer',
+      method: "POST",
+      header: {
+        'Content-Type': 'application/x-www-form-urlencoded' },
+
+      data: {
+        qq: '' },
+
+
+      success: function success(res) {
+        // debugger
+        console.log(res.data);
+        if (res.data.status == 200) {
+          that.TrailerList = res.data.data;
+
+        }
+
+      } });
+
+    that.refresh();
   },
-  methods: {} };exports.default = _default;
+  methods: {
+    refresh: function refresh() {
+      var that = this;
+
+      uni.showLoading({
+        mask: true });
+
+      uni.showNavigationBarLoading();
+
+
+      var serverUrl = that.serverUrl;
+      // 查询猜你喜欢
+      uni.request({
+        url: serverUrl + '/index/guessULike',
+        method: "POST",
+        header: {
+          'Content-Type': 'application/x-www-form-urlencoded' },
+
+        data: {
+          qq: '' },
+
+
+        success: function success(res) {
+          // debugger
+          console.log(res.data);
+          if (res.data.status == 200) {
+            that.guessULikeList = res.data.data;
+          }
+        },
+        // 请就到数据  隐藏等待图标
+        complete: function complete() {
+          uni.hideNavigationBarLoading();
+          uni.hideLoading();
+          uni.stopPullDownRefresh();
+        } });
+
+    },
+
+    // 实现点赞动画效果
+    praiseMe: function praiseMe(e) {
+
+      var gIndex = e.currentTarget.dataset.gindex; //搞不懂
+      console.log(gIndex);
+
+      // 构建动画数据，并且通过step来表示这组动画的完成
+      this.animation.translateY(-60).opacity(1).step({
+        duration: 400 });
+
+      // 导出动画数据到view组件，实现组件的动画效果
+      this.animationData = this.animation;
+      this.animationDataArr[gIndex] = this.animationData.export();
+      // 还原动画
+      setTimeout(function () {
+        this.animation.translateY(0).opacity(0).step({
+          duration: 0 });
+
+        this.animationDataArr[gIndex] = this.animationData.export();
+      }.bind(this), 500);
+
+    } },
+
+
+  // 注册自定义组件
+  components: {
+    HelloComp: HelloComp,
+    trailerStars: trailerStars } };exports.default = _default;
 /* WEBPACK VAR INJECTION */}.call(this, __webpack_require__(/*! ./node_modules/@dcloudio/uni-mp-weixin/dist/index.js */ "./node_modules/@dcloudio/uni-mp-weixin/dist/index.js")["default"]))
 
 /***/ }),

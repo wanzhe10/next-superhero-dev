@@ -4,17 +4,14 @@
 		"ignore": []
 	},
 	"setting": {
-		"urlCheck": false,
-		"es6": true,
-		"postcss": true,
-		"minified": true,
-		"newFeature": true,
-		"autoAudits": false
+		"urlCheck": false
 	},
 	"compileType": "miniprogram",
 	"libVersion": "2.6.4",
-	"appid": "wx1f978dd0a7b965b1",
+	"appid": "touristappid",
 	"projectname": "next-superhero-dev",
+	"simulatorType": "wechat",
+	"simulatorPluginLibVersion": {},
 	"condition": {
 		"search": {
 			"current": -1,
