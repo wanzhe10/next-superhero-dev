@@ -22,7 +22,13 @@
         }
         ,{
             "path" : "pages/movie/movie",
-            "style" : {}
+          	"style": {
+          	 "app-plus": {
+                  "titleNView": {
+					  "type":"transparent"
+				  }
+              }
+          }
         }
     ],
 	"globalStyle": {

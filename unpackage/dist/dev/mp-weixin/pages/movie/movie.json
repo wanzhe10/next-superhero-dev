@@ -1,0 +1,6 @@
+{
+  "usingComponents": {
+    "trailer-stars": "/components/trailerStars",
+    "line-wapper": "/components/line"
+  }
+}
